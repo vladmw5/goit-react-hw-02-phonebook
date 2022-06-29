@@ -1,9 +1,12 @@
-import { Fragment, Component } from 'react';
+import { Component } from 'react';
 
 import Section from './Section';
 import ContactList from './ContactList';
 import Phonebook from './Phonebook';
 import Filter from './Filter';
+
+import s from './App.module.css';
+import capitalize from 'utils/capitalize';
 
 class App extends Component {
   state = {
@@ -14,10 +17,6 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '129-21-23' },
       { id: 'id-5', name: 'Felix Blumenfeld', number: '227-91-26' },
       { id: 'id-6', name: 'Antonio Nepomuceno', number: '555-12-21' },
-      { id: 'id-7', name: 'Sergei Bortkiewicz', number: '287-11-06' },
-      { id: 'id-8', name: 'Myroslav Skoryk', number: '900-91-56' },
-      { id: 'id-9', name: "Casse O'Tyranne", number: '111-11-11' },
-      { id: 'id-10', name: 'Clemence Nostra', number: '276-25-34' },
     ],
     filter: '',
   };
@@ -30,7 +29,9 @@ class App extends Component {
 
     if (doesAlreadyExist) {
       alert(
-        `${newContact.name}'s contact already exists. Please, next time be more attentive to what you are trying to add`
+        `${capitalize(
+          newContact.name
+        )}'s contact already exists. Please, next time be more attentive to what you are trying to add`
       );
       return;
     }
@@ -74,18 +75,20 @@ class App extends Component {
     const { contacts, filter } = this.state;
 
     return (
-      <Fragment>
-        <Section title="Phonebook">
-          <Phonebook addContact={addContact} />
-        </Section>
-        <Section title="Contacts">
-          <Filter name={filter} inputHandler={handleFilterInput} />
-          <ContactList
-            contacts={filterContacts(contacts)}
-            deleteBtnHandler={handleDeleteContactBtnClick}
-          />
-        </Section>
-      </Fragment>
+      <div className={s.container}>
+        <div className={s.app}>
+          <Section title="Phonebook">
+            <Phonebook addContact={addContact} />
+          </Section>
+          <Section title="Contacts">
+            <Filter name={filter} inputHandler={handleFilterInput} />
+            <ContactList
+              contacts={filterContacts(contacts)}
+              deleteBtnHandler={handleDeleteContactBtnClick}
+            />
+          </Section>
+        </div>
+      </div>
     );
   }
 }

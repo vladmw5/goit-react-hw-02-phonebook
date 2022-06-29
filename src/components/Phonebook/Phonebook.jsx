@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 
+import s from './Phonebook.module.css';
+
 const INITIAL_STATE = {
   name: '',
   number: '',
@@ -38,9 +40,12 @@ class Phonebook extends Component {
     const nameInputId = nanoid();
     const phoneNumberInputId = nanoid();
     return (
-      <form onSubmit={this.handleContactSubmit}>
-        <label htmlFor={nameInputId}>Name</label>
+      <form className={s.form} onSubmit={this.handleContactSubmit}>
+        <label className={s.label} htmlFor={nameInputId}>
+          Name
+        </label>
         <input
+          className={s.input}
           id={nameInputId}
           value={this.state.name}
           onChange={this.handleInputChange}
@@ -50,8 +55,11 @@ class Phonebook extends Component {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-        <label htmlFor={phoneNumberInputId}>Phone Number</label>
+        <label className={s.label} htmlFor={phoneNumberInputId}>
+          Phone Number
+        </label>
         <input
+          className={s.input}
           id={phoneNumberInputId}
           value={this.state.number}
           onChange={this.handleInputChange}
@@ -61,7 +69,9 @@ class Phonebook extends Component {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-        <button type="submit">Add Contact</button>
+        <button className={`Button ${s.addBtn}`} type="submit">
+          Add Contact
+        </button>
       </form>
     );
   }

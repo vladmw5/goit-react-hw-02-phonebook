@@ -1,12 +1,19 @@
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
+
+import s from './Filter.module.css';
 
 const Filter = ({ name, inputHandler }) => {
   return (
-    <Fragment>
+    <div className={s.wrapper}>
       <p>Find Contacts by Name</p>
-      <input type="text" name="filter" value={name} onChange={inputHandler} />
-    </Fragment>
+      <input
+        className={s.input}
+        type="text"
+        name="filter"
+        value={name}
+        onChange={inputHandler}
+      />
+    </div>
   );
 };
 
